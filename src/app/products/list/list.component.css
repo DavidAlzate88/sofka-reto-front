@@ -1,0 +1,12 @@
+.product-list-container {
+  width: 50%;
+  margin: 16px auto;
+}
+
+.create-product-button {
+  float: right;
+}
+
+table {
+  width: 100%;
+}
