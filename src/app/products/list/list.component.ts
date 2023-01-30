@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { HttpProviderService } from "../../service/http-provider.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ModalComponent } from "../../modal/modal.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-list',
@@ -15,20 +16,21 @@ export class ListComponent implements OnInit {
   dataSource = [];
 
   constructor(
-    private  route: Router,
+    private route: Router,
     private httpProvider : HttpProviderService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
   }
 
   ngOnInit(): void {
     this.getAllProducts();
   }
-  async getAllProducts() {
+  private async getAllProducts() {
     this.httpProvider.getAllProducts().subscribe((data : any) => {
         if (data != null && data.body != null) {
-          const resultData
-            = data.body;
+          const resultData = data.body;
+
           if (resultData) {
             this.dataSource = resultData;
           }
@@ -58,7 +60,7 @@ export class ListComponent implements OnInit {
     );
   }
 
-  deleteProduct(id: String) {
+  confirmDeleteProduct(id: String) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
       data: {
@@ -70,9 +72,31 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        console.log(result)
-        console.log('remove product')
+        this.deleteProduct(result.id);
       }
+    });
+  }
+
+  private deleteProduct(result: any) {
+    this.httpProvider.deleteProduct(result).subscribe((data : any) => {
+        if (data.status === 204 && data.statusText === 'No Content') {
+          this.getAllProducts();
+        }
+      },
+      (error : any)=> {
+        if (error) {
+          console.log(error);
+          if (error.status == 404 && error.statusText === 'Not Found') {
+            this.openSnackBar('An Error occurred while trying to delete the product. Try again later');
+          }
+        }
+      });
+  }
+
+  openSnackBar(msg: string) {
+    this.snackBar.open(msg, 'Close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 }

@@ -5,10 +5,8 @@ import {Observable} from "rxjs";
 const apiUrl = "http://localhost:8080/";
 
 const httpLink = {
-  getAllProducts: apiUrl + "api/products",
-  deleteEmployeeById: apiUrl + "api/products/",
-  getEmployeeDetailById: apiUrl + "/api/employee/getEmployeeDetailById",
-  saveEmployee: apiUrl + "/api/employee/saveEmployee"
+  productsUrl: apiUrl + "api/products",
+  buyssUrl: apiUrl + "api/buys"
 };
 
 @Injectable({
@@ -19,18 +17,19 @@ export class HttpProviderService {
   constructor(private webApiService: WebApiService) { }
 
   public getAllProducts(): Observable<any> {
-    return this.webApiService.get(httpLink.getAllProducts);
+    return this.webApiService.get(httpLink.productsUrl);
   }
 
-  public saveEmployee(model: any): Observable<any> {
-    return this.webApiService.post(httpLink.saveEmployee, model);
+  public saveProduct(model: any): Observable<any> {
+    return this.webApiService.post(httpLink.productsUrl, model);
   }
 
-  public deleteEmployeeById(model: any): Observable<any> {
-    return this.webApiService.delete(httpLink.deleteEmployeeById + model, "");
+  public deleteProduct(id: String): Observable<any> {
+    console.log(id);
+    return this.webApiService.delete(httpLink.productsUrl + '/' + id, "");
   }
 
-  public getEmployeeDetailById(model: any): Observable<any> {
-    return this.webApiService.get(httpLink.getEmployeeDetailById + '?employeeId=' + model);
+  public getProductById(model: any): Observable<any> {
+    return this.webApiService.get(httpLink.productsUrl + model);
   }
 }

@@ -2,3 +2,7 @@ mat-card {
   width: 35%;
   margin: 16px auto;
 }
+
+.mdc-dialog__container {
+  width: 500px
+}
