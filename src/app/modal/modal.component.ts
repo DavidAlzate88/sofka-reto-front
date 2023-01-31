@@ -4,7 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 export interface DialogData {
   title: string;
   msg: string;
-  data: any;
+  data?: any;
+  cancel?: boolean
+  errors?: any;
 }
 
 @Component({
@@ -15,6 +17,7 @@ export interface DialogData {
 export class ModalComponent {
   title: string;
   msg: string;
+  errors: any;
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
@@ -22,6 +25,7 @@ export class ModalComponent {
   ) {
     this.title = data.title;
     this.msg = data.msg;
+    this.errors = data.errors;
   }
 
   onCancelClick(): void {

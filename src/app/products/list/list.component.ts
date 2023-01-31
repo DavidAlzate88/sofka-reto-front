@@ -64,7 +64,7 @@ export class ListComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
       data: {
-        title: 'Borrar producto',
+        title: 'Delete product',
         msg: 'Do you want to delete this product?',
         data: { id }
       }

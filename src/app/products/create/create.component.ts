@@ -54,8 +54,6 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.productForm.value)
-
     if (!this.id) {
       this.createProduct(this.productForm.value);
     } else {
@@ -71,9 +69,8 @@ export class CreateComponent implements OnInit {
       },
       (error : any)=> {
         if (error) {
-          console.log(error);
           if (error.status == 400) {
-            const errors = error.product;
+            const errors = error.error.product;
             // this.openSnackBar('An Error occurred while trying to create the product. Try again later');
             this.modalMessage(errors);
           }
@@ -87,11 +84,12 @@ export class CreateComponent implements OnInit {
 
   modalMessage(data: any) {
     this.dialog.open(ModalComponent, {
-      width: '250px',
+      width: '500px',
       data: {
         title: 'Error',
         msg: 'An Error occurred while trying to create the product',
-        data: { data }
+        cancel: false,
+        errors: { values: data }
       }
     });
   }

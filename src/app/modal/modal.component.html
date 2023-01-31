@@ -1,6 +1,13 @@
 <h1 mat-dialog-title>{{title}}</h1>
-<div mat-dialog-content>{{msg}}</div>
+<div mat-dialog-content>
+  {{msg}}
+  <div *ngIf="errors">
+    <mat-list *ngFor="let error of errors.values">
+      <mat-list-item>{{error}}</mat-list-item>
+    </mat-list>
+  </div>
+</div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button *ngIf="data.cancel" (click)="onCancelClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="data.data" cdkFocusInitial>Ok</button>
 </div>

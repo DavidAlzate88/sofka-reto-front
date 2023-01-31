@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
-    <mat-list>
+    <mat-nav-list >
       <div mat-subheader>Products</div>
       <mat-list-item *ngFor="let product of products">
         <mat-icon matListItemIcon>{{product.icon}}</mat-icon>
@@ -12,7 +12,7 @@
         <mat-icon matListItemIcon>{{buy.icon}}</mat-icon>
         <div matListItemTitle>{{buy.name}}</div>
       </mat-list-item>
-    </mat-list>
+    </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
