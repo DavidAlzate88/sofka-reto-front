@@ -11,7 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  tittle = 'Pokemon product list';
+  tittle = 'Manage pokemon product';
   displayedColumns: string[] = ['name', 'inInventory', 'enabled', 'min', 'max', 'actions'];
   dataSource = [];
 

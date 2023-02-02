@@ -14,9 +14,11 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 
 const materialModules = [
+  MatToolbarModule,
   MatSidenavModule,
   MatListModule,
   MatTableModule,
